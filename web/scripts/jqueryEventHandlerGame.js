@@ -1,9 +1,6 @@
-$( document ).ready(function(){
-    
+$( document ).ready(function(){  
     var id = getUrlParameter('id');
     getGameStatus(id);
-    
- 
 });
 
 
