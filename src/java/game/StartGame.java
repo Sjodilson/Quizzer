@@ -43,9 +43,10 @@ public class StartGame extends HttpServlet {
  
         try {
             logger.info("Retriving game");
-            String gameName = request.getParameter("gameName");
-            List<Game> games =  em.createQuery("SELECT g FROM Game AS g WHERE g.name='" + gameName + "'", Game.class).getResultList();
-            Game game = games.get(0);
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            
+
+            Game game = em.find(Game.class, id);
             game.setGameStarted(true);
             
             game.getPlayers().stream().forEach((p) -> {
@@ -73,8 +74,8 @@ public class StartGame extends HttpServlet {
             JSONObject obj = new JSONObject(currentQuestion);
             obj.put("roundName", currentRound.getName());
             obj.put("status", "ok");
-            obj.put("message", "Game: " + gameName + " started");
-            obj.put("game", gameName);
+            obj.put("message", "Game: " + game.getName() + " started");
+            obj.put("game", game.getName());
             out.print(obj);
             
             

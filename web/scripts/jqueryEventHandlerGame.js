@@ -1,6 +1,10 @@
-$( document ).ready(function(){  
-    var id = getUrlParameter('id');
-    getGameStatus(id);
+$( document ).ready(function(){
+    sessionStorage.setItem('sessionCreated', 'false');
+    var tid = setInterval(updateGame, 1000);
+    
+
+    
+
 });
 
 
@@ -18,3 +22,8 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+
+function updateGame(){
+    var id = getUrlParameter('id');
+    updateUI(id);
+}
